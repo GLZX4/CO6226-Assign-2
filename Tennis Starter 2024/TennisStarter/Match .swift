@@ -5,11 +5,26 @@
 //  Created by GEORGE HARRISON on 30/01/2025.
 //  Copyright © 2025 University of Chester. All rights reserved.
 //
+
+
 class Match {
     private var player1SetsWon: Int = 0
     private var player2SetsWon: Int = 0
     private var currentSet: Set = Set()
+    private var firstServer = 1;
+    
+    
+    
+    
+    func setFirstServer(player: Int) {
+        firstServer = player
+    }
 
+    func isPlayer1Serving() -> Bool {
+        return firstServer == 1
+    }
+
+    
     func addGamePlayer1() {
         currentSet.addGameToPlayer1()
         if currentSet.complete() {
