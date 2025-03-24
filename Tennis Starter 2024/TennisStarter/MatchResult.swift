@@ -13,5 +13,6 @@ struct MatchResult: Codable {
     let player1Sets: Int
     let player2Sets: Int
     let timestamp: Date
+    let completeGame: Bool
 }
 

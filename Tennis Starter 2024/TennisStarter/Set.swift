@@ -73,6 +73,17 @@ class Set {
                abs(player1TieBreakPoints - player2TieBreakPoints) >= 2
     }
     
+    func winner() -> String? {
+        if hasWon(player1GamesWon, player2GamesWon) {
+            return "Player 1"
+        } else if hasWon(player2GamesWon, player1GamesWon) {
+            return "Player 2"
+        } else {
+            return nil
+        }
+    }
+
+    
     func loadState(player1Games: Int, player2Games: Int, tieBreakActive: Bool) {
         self.player1GamesWon = player1Games
         self.player2GamesWon = player2Games

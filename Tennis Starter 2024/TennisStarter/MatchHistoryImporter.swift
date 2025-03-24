@@ -17,37 +17,31 @@ class MatchHistoryImporter {
         return documentDirectory.appendingPathComponent(filename)
     }
     
-    func saveMatch(_ match: MatchResult) {
-        try? FileManager.default.removeItem(at: fileURL)
-        print("Deleted history.json, please save a new match.")
-
+    func saveMatch(_ result: MatchResult) {
         var matches = loadMatches()
-        matches.append(match)
-        
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
+        matches.append(result)
 
         do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
             let data = try encoder.encode(matches)
             try data.write(to: fileURL)
-            let jsonString = String(data: data, encoding: .utf8) ?? "Could not convert JSON"
-            print("Saved match history JSON content: \(jsonString)")
+            print("✅ Saved match history at: \(fileURL.path)")
         } catch {
-            print("Error saving match: \(error.localizedDescription)")
+            print("❌ Failed to save match history: \(error)")
         }
     }
 
     
     func loadMatches() -> [MatchResult] {
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601  // Ensure it decodes the correct date format
+        decoder.dateDecodingStrategy = .iso8601
 
         do {
             let data = try Data(contentsOf: fileURL)
-            print("Match history JSON content: \(String(data: data, encoding: .utf8) ?? "N/A")")
             return try decoder.decode([MatchResult].self, from: data)
         } catch {
-            print("Error decoding match history: \(error.localizedDescription)")
+            print("❌ Error decoding match history: \(error)")
             return []
         }
     }

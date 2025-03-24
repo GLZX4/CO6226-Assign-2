@@ -38,12 +38,24 @@ class ViewController: UIViewController {
     private var game = Game()
     private var match = Match()
     var audioPlayer: AVAudioPlayer?
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if UserDefaults.standard.dictionary(forKey: "savedGame") != nil {
+            showResumePrompt()
+        }
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     @IBAction func previousMatchesPressed(_ sender: UIButton) {
+        saveGame()
         performSegue(withIdentifier: "showMatchHistory", sender: self)
     }
 
@@ -64,6 +76,7 @@ class ViewController: UIViewController {
         }
 
         updateUI()
+        saveGame()
     }
 
     
@@ -82,6 +95,7 @@ class ViewController: UIViewController {
         }
 
         updateUI()
+        saveGame()
     }
 
     
@@ -97,16 +111,14 @@ class ViewController: UIViewController {
             self.game = Game()
             self.match = Match()
 
-            // Reset player names
             self.p1NameField.text = ""
             self.p2NameField.text = ""
 
-            // Show name input fields again
             self.p1NameField.isHidden = false
             self.p2NameField.isHidden = false
             self.firstServerSegment.isHidden = false
             self.startGameButton.isHidden = false
-            self.gameContainerView.isHidden = true  // Hide match UI
+            self.gameContainerView.isHidden = true
 
             self.updateUI()
         })
@@ -150,6 +162,47 @@ class ViewController: UIViewController {
             p2PointsLabel.backgroundColor = .clear
         }
     }
+    
+    private func showResumePrompt() {
+        let alert = UIAlertController(
+            title: "Resume Match?",
+            message: "Would you like to continue your previous match or start a new one?",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Continue", style: .default) { _ in
+            self.loadGame()
+        })
+
+        alert.addAction(UIAlertAction(title: "Start New", style: .destructive) { _ in
+            UserDefaults.standard.removeObject(forKey: "savedGame")
+            self.resetToNewGame()
+        })
+
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func resetToNewGame() {
+        game = Game()
+        match = Match()
+        
+        p1NameField.text = ""
+        p2NameField.text = ""
+
+        p1NameField.isHidden = false
+        p2NameField.isHidden = false
+        firstServerSegment.isHidden = false
+        startGameButton.isHidden = false
+        gameContainerView.isHidden = true
+
+        player1Name = "Player 1"
+        player2Name = "Player 2"
+        p1NameLabel.text = player1Name
+        p2NameLabel.text = player2Name
+
+        updateUI()
+    }
+
 
     
     private func updateServingColours() {
@@ -158,19 +211,46 @@ class ViewController: UIViewController {
         p1NameLabel.backgroundColor = isPlayer1Serving ? .purple : .clear
         p2NameLabel.backgroundColor = isPlayer1Serving ? .clear : .purple
     }
+    
+    private func persistCurrentGame() {
+        let gameState: [String: Any] = [
+            "player1": game.player1Score(),
+            "player2": game.player2Score(),
+            "player1GamesWon": match.returnCurrentGamesPlayer1(),
+            "player2GamesWon": match.returnCurrentGamesPlayer2(),
+            "player1Sets": match.player1Sets(),
+            "player2Sets": match.player2Sets(),
+            "tieBreakActive": match.returnCurrentTieBreakStatus(),
+            "player1Name": player1Name,
+            "player2Name": player2Name
+        ]
+        UserDefaults.standard.set(gameState, forKey: "savedGame")
+    }
+
 
     
     private func showWinnerAlert() {
         let winner = match.winner() ?? "No Winner Yet"
+        
+        let winnerName: String
+        
+        if winner == "Player 1" {
+            winnerName = player1Name
+        } else if winner == "Player 2" {
+            winnerName = player2Name
+        } else {
+            winnerName = winner
+        }
         let matchResult = MatchResult (
-            winner: winner,
+            winner: winnerName,
             player1Sets: match.player1Sets(),
             player2Sets: match.player2Sets(),
-            timestamp: Date()
+            timestamp: Date(),
+            completeGame: true
         )
         MatchHistoryImporter.shared.saveMatch(matchResult)
         
-        let alert = UIAlertController(title: "Match Over", message: "\(winner) wins the match!", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Match Over", message: "\(winnerName) wins the match!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
@@ -195,19 +275,24 @@ class ViewController: UIViewController {
 
     private func saveGame() {
         let gameState: [String: Any] = [
-            player1Name : game.player1Score(),
-            player2Name: game.player2Score(),
+            "player1": game.player1Score(),
+            "player2": game.player2Score(),
             "player1GamesWon": match.returnCurrentGamesPlayer1(),
             "player2GamesWon": match.returnCurrentGamesPlayer2(),
             "player1Sets": match.player1Sets(),
             "player2Sets": match.player2Sets(),
-            "tieBreakActive": match.returnCurrentTieBreakStatus()
+            "tieBreakActive": match.returnCurrentTieBreakStatus(),
+            "player1Name": player1Name,
+            "player2Name": player2Name
         ]
+        
+
         UserDefaults.standard.set(gameState, forKey: "savedGame")
     }
 
     private func loadGame() {
         guard let savedState = UserDefaults.standard.dictionary(forKey: "savedGame") else { return }
+        print(savedState)
         match.loadState(
             player1Games: savedState["player1GamesWon"] as? Int ?? 0,
             player2Games: savedState["player2GamesWon"] as? Int ?? 0,
@@ -215,9 +300,35 @@ class ViewController: UIViewController {
             player2Sets: savedState["player2Sets"] as? Int ?? 0,
             tieBreakActive: savedState["tieBreakActive"] as? Bool ?? false
         )
+        
+        player1Name = savedState["player1Name"] as? String ?? "Player 1"
+        
+        if let name1 = savedState["player1Name"] as? String {
+            player1Name = name1
+            p1NameLabel.text = name1
+
+        } else {
+            print("⚠️ Cannot find player 1 name: \(String(describing: savedState["player1Name"]))")
+        }
+
+        if let name2 = savedState["player2Name"] as? String {
+            player2Name = name2
+            p2NameLabel.text = name2
+
+        } else {
+            print("⚠️ Cannot find player 2 name: \(String(describing: savedState["player2Name"]))")
+        }
+
+        p1NameField.isHidden = true
+        p2NameField.isHidden = true
+        firstServerSegment.isHidden = true
+        startGameButton.isHidden = true
+        gameContainerView.isHidden = false
+
         game.resetGame()
         updateUI()
     }
+
 
     @IBAction func savePressed(_ sender: UIButton) {
         animateButton(sender)

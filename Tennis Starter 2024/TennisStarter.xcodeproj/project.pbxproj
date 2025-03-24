@@ -13,6 +13,8 @@
 		26308A662D8B334A00D8C46A /* MatchHistoryImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A642D8B334A00D8C46A /* MatchHistoryImporter.swift */; };
 		26308A682D8B39BC00D8C46A /* PreviousMatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A672D8B39BC00D8C46A /* PreviousMatchesViewController.swift */; };
 		26308A692D8B39BC00D8C46A /* PreviousMatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A672D8B39BC00D8C46A /* PreviousMatchesViewController.swift */; };
+		26308A6E2D91EC9500D8C46A /* MatchLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A6D2D91EC9500D8C46A /* MatchLogicTests.swift */; };
+		26308A702D91F00400D8C46A /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A6F2D91F00400D8C46A /* SetTests.swift */; };
 		26AB4AFD2D4C294E00A24773 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AB4AFC2D4C294E00A24773 /* Set.swift */; };
 		26AB4AFE2D4C294E00A24773 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AB4AFC2D4C294E00A24773 /* Set.swift */; };
 		26AB4B002D4C296300A24773 /* Match .swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AB4AFF2D4C296300A24773 /* Match .swift */; };
@@ -44,6 +46,8 @@
 		26308A5F2D8B329500D8C46A /* MatchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchResult.swift; sourceTree = "<group>"; };
 		26308A642D8B334A00D8C46A /* MatchHistoryImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHistoryImporter.swift; sourceTree = "<group>"; };
 		26308A672D8B39BC00D8C46A /* PreviousMatchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousMatchesViewController.swift; sourceTree = "<group>"; };
+		26308A6D2D91EC9500D8C46A /* MatchLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchLogicTests.swift; sourceTree = "<group>"; };
+		26308A6F2D91F00400D8C46A /* SetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
 		26AB4AFC2D4C294E00A24773 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		26AB4AFF2D4C296300A24773 /* Match .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Match .swift"; sourceTree = "<group>"; };
 		49F7F399208622C100B49CC3 /* Sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sound.wav; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 			children = (
 				BBA6F8EE1B26E78E006642BC /* Supporting Files */,
 				BBA6F8FC1B26E86B006642BC /* GameTests.swift */,
+				26308A6D2D91EC9500D8C46A /* MatchLogicTests.swift */,
+				26308A6F2D91F00400D8C46A /* SetTests.swift */,
 			);
 			path = TennisStarterTests;
 			sourceTree = "<group>";
@@ -264,11 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26308A6E2D91EC9500D8C46A /* MatchLogicTests.swift in Sources */,
 				26308A652D8B334A00D8C46A /* MatchHistoryImporter.swift in Sources */,
 				26AB4AFD2D4C294E00A24773 /* Set.swift in Sources */,
 				49F4A80B1FFD36F6004C17A9 /* ViewController.swift in Sources */,
 				26AB4B002D4C296300A24773 /* Match .swift in Sources */,
 				496B3CDE1CE0BAA80090A701 /* Game.swift in Sources */,
+				26308A702D91F00400D8C46A /* SetTests.swift in Sources */,
 				26308A612D8B329500D8C46A /* MatchResult.swift in Sources */,
 				BBA6F8FD1B26E86B006642BC /* GameTests.swift in Sources */,
 				26308A682D8B39BC00D8C46A /* PreviousMatchesViewController.swift in Sources */,
