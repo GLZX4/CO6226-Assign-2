@@ -100,14 +100,6 @@ class ViewController: UIViewController {
 
     
     @IBAction func restartPressed(_ sender: AnyObject) {
-        let alert = UIAlertController(
-            title: "Restart Match",
-            message: "Are you sure you want to restart the match?",
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Restart", style: .destructive) { _ in
             self.game = Game()
             self.match = Match()
 
@@ -121,11 +113,8 @@ class ViewController: UIViewController {
             self.gameContainerView.isHidden = true
 
             self.updateUI()
-        })
 
-        present(alert, animated: true, completion: nil)
     }
-
 
 
     private func updateUI() {

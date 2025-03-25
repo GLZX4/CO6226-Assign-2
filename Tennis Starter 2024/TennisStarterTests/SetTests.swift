@@ -47,30 +47,42 @@ final class SetTests: XCTestCase {
         XCTAssertTrue(set.isTieBreakActive())
     }
     
-    func testTiebreakVictory() {
+    func testTieBreakVictory() {
         let set = Set()
+        
         for _ in 0..<6 {
             set.addGameToPlayer1()
             set.addGameToPlayer2()
         }
-        
-        for _ in 0..<7 {
+
+        for _ in 0..<5 {
             set.addGameToPlayer1()
+            set.addGameToPlayer2()
         }
         
+        set.addGameToPlayer1()
+        set.addGameToPlayer1()
+
         XCTAssertTrue(set.complete())
         XCTAssertEqual(set.winner(), "Player 1")
     }
+
+
     
     func testSetNotWonAt6to5() {
         let set = Set()
-        for _ in 0..<6 { set.addGameToPlayer1() }
-        for _ in 0..<5 { set.addGameToPlayer2() }
-        
+        for _ in 0..<5 {
+            set.addGameToPlayer1()
+            set.addGameToPlayer2()
+        }
+
+        set.addGameToPlayer1()
+
         XCTAssertFalse(set.complete())
         XCTAssertNil(set.winner())
     }
-    
+
+
     func testLoadStateWorksCorrectly() {
         let set = Set()
         set.loadState(player1Games: 4, player2Games: 3, tieBreakActive: false)

@@ -58,9 +58,25 @@ class Set {
         return hasWon(player1GamesWon, player2GamesWon) || hasWon(player2GamesWon, player1GamesWon)
     }
 
+
     private func hasWon(_ playerGames: Int, _ opponentGames: Int) -> Bool {
-        return playerGames >= 6 && playerGames - opponentGames >= 2
+        if tieBreakActive {
+            return false
+        }
+
+        if playerGames >= 6 && playerGames - opponentGames >= 2 {
+            return true
+        }
+
+        if playerGames == 7 && (opponentGames == 5 || opponentGames == 6) {
+            return true
+        }
+
+        return false
     }
+
+
+
 
     private func checkTieBreak() {
         if player1GamesWon == 6 && player2GamesWon == 6 {
@@ -74,14 +90,16 @@ class Set {
     }
     
     func winner() -> String? {
-        if hasWon(player1GamesWon, player2GamesWon) {
-            return "Player 1"
-        } else if hasWon(player2GamesWon, player1GamesWon) {
-            return "Player 2"
-        } else {
-            return nil
+        if complete() {
+            if hasWon(player1GamesWon, player2GamesWon) {
+                return "Player 1"
+            } else if hasWon(player2GamesWon, player1GamesWon) {
+                return "Player 2"
+            }
         }
+        return nil
     }
+
 
     
     func loadState(player1Games: Int, player2Games: Int, tieBreakActive: Bool) {
