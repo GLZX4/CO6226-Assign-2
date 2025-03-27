@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     
     var player1Name: String = "Player 1"
     var player2Name: String = "Player 2"
+    private var initalServerPlayer1: Bool = false
 
 
     private var game = Game()
@@ -43,8 +44,9 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if UserDefaults.standard.dictionary(forKey: "savedGame") != nil {
+
+        if UserDefaults.standard.dictionary(forKey: "savedGame") != nil,
+           !isSavedMatchComplete() {
             showResumePrompt()
         }
     }
@@ -195,11 +197,20 @@ class ViewController: UIViewController {
 
     
     private func updateServingColours() {
-        // This is a simplified placeholder:
-        let isPlayer1Serving = match.returnCurrentGamesPlayer1() % 2 == 0
+        guard !gameContainerView.isHidden else {
+            p1NameLabel.backgroundColor = .clear
+            p2NameLabel.backgroundColor = .clear
+            return
+        }
+
+        let totalGames = match.returnCurrentGamesPlayer1() + match.returnCurrentGamesPlayer2()
+        let isPlayer1Serving = (totalGames % 2 == 0) ? initalServerPlayer1 : !initalServerPlayer1
+
         p1NameLabel.backgroundColor = isPlayer1Serving ? .purple : .clear
         p2NameLabel.backgroundColor = isPlayer1Serving ? .clear : .purple
     }
+
+
     
     private func persistCurrentGame() {
         let gameState: [String: Any] = [
@@ -335,22 +346,32 @@ class ViewController: UIViewController {
         player1Name = p1NameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Player 1"
         player2Name = p2NameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Player 2"
 
+        initalServerPlayer1 = firstServerSegment.selectedSegmentIndex == 0
+
         p1Button.setTitle(player1Name, for: .normal)
         p1NameLabel.text = player1Name
         p2Button.setTitle(player2Name, for: .normal)
         p2NameLabel.text = player2Name
 
-
         p1NameField.isHidden = true
         p2NameField.isHidden = true
-
         firstServerSegment.isHidden = true
         startGameButton.isHidden = true
         gameContainerView.isHidden = false
 
+        updateServingColours()
+
         DispatchQueue.main.async {
             self.view.layoutIfNeeded()
         }
-
     }
+    
+    private func isSavedMatchComplete() -> Bool {
+        guard let savedState = UserDefaults.standard.dictionary(forKey: "savedGame") else { return false }
+        let player1Sets = savedState["player1Sets"] as? Int ?? 0
+        let player2Sets = savedState["player2Sets"] as? Int ?? 0
+        return player1Sets == 3 || player2Sets == 3
+    }
+
+
 }
