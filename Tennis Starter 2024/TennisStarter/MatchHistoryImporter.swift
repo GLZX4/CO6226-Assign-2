@@ -8,6 +8,11 @@
 
 import Foundation
 
+//code for saving and reading data to json adapted from the following sources:
+// https://medium.com/@lrkhan/storing-app-data-locally-99e36d4b91a0
+// https://www.swiftyplace.com/blog/codable-how-to-simplify-converting-json-data-to-swift-objects-and-vice-versa
+//
+
 class MatchHistoryImporter {
     static let shared = MatchHistoryImporter()
     private let filename = "history.json"
@@ -26,9 +31,9 @@ class MatchHistoryImporter {
             encoder.dateEncodingStrategy = .iso8601
             let data = try encoder.encode(matches)
             try data.write(to: fileURL)
-            print("✅ Saved match history at: \(fileURL.path)")
+            print("Saved match history at: \(fileURL.path)")
         } catch {
-            print("❌ Failed to save match history: \(error)")
+            print("Failed to save match history: \(error)")
         }
     }
 
@@ -41,7 +46,7 @@ class MatchHistoryImporter {
             let data = try Data(contentsOf: fileURL)
             return try decoder.decode([MatchResult].self, from: data)
         } catch {
-            print("❌ Error decoding match history: \(error)")
+            print("Error decoding match history: \(error)")
             return []
         }
     }

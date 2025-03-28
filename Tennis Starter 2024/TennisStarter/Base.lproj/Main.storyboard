@@ -388,14 +388,14 @@
                         <outlet property="p1NameField" destination="Lly-Cu-sWf" id="tAe-Lw-DDE"/>
                         <outlet property="p1NameLabel" destination="rqQ-Pb-r7o" id="Fl6-i6-v79"/>
                         <outlet property="p1PointsLabel" destination="bng-ny-Uzr" id="o7p-8F-SDe"/>
-                        <outlet property="p1PreviousSetsLabel" destination="6ei-zi-3lF" id="rXa-ze-weV"/>
+                        <outlet property="p1PreviousSetsLabel" destination="6ei-zi-3lF" id="NiC-HY-2vu"/>
                         <outlet property="p1SetsLabel" destination="BTB-5U-tgn" id="3cP-vR-cex"/>
                         <outlet property="p2Button" destination="PYJ-wZ-WYb" id="V5Z-d3-RL3"/>
                         <outlet property="p2GamesLabel" destination="lpu-uA-9gh" id="mLu-MO-zMW"/>
                         <outlet property="p2NameField" destination="nel-hh-6NL" id="yhs-xh-pJS"/>
                         <outlet property="p2NameLabel" destination="bd7-eK-WCq" id="Y0C-9a-tok"/>
                         <outlet property="p2PointsLabel" destination="rtX-yz-HZy" id="wyt-bW-KIn"/>
-                        <outlet property="p2PreviousSetsLabel" destination="8kJ-KT-9fG" id="Dkd-KL-tgT"/>
+                        <outlet property="p2PreviousSetsLabel" destination="8kJ-KT-9fG" id="1cv-Sk-dUe"/>
                         <outlet property="p2SetsLabel" destination="QFl-Tx-SPI" id="lex-9m-z7u"/>
                         <outlet property="startGameButton" destination="xEi-23-M0W" id="Eeu-3O-Zdh"/>
                     </connections>

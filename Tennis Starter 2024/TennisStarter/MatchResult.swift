@@ -15,4 +15,3 @@ struct MatchResult: Codable {
     let timestamp: Date
     let completeGame: Bool
 }
-

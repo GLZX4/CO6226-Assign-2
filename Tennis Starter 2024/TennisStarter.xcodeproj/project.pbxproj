@@ -15,6 +15,12 @@
 		26308A692D8B39BC00D8C46A /* PreviousMatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A672D8B39BC00D8C46A /* PreviousMatchesViewController.swift */; };
 		26308A6E2D91EC9500D8C46A /* MatchLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A6D2D91EC9500D8C46A /* MatchLogicTests.swift */; };
 		26308A702D91F00400D8C46A /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A6F2D91F00400D8C46A /* SetTests.swift */; };
+		26308A722D95970300D8C46A /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A712D95970300D8C46A /* GameController.swift */; };
+		26308A732D95970300D8C46A /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A712D95970300D8C46A /* GameController.swift */; };
+		26308A752D95974800D8C46A /* MatchPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A742D95974800D8C46A /* MatchPersistence.swift */; };
+		26308A762D95974800D8C46A /* MatchPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A742D95974800D8C46A /* MatchPersistence.swift */; };
+		26308A782D95994F00D8C46A /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A772D95994F00D8C46A /* AudioPlayer.swift */; };
+		26308A792D95994F00D8C46A /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26308A772D95994F00D8C46A /* AudioPlayer.swift */; };
 		26AB4AFD2D4C294E00A24773 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AB4AFC2D4C294E00A24773 /* Set.swift */; };
 		26AB4AFE2D4C294E00A24773 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AB4AFC2D4C294E00A24773 /* Set.swift */; };
 		26AB4B002D4C296300A24773 /* Match .swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AB4AFF2D4C296300A24773 /* Match .swift */; };
@@ -48,6 +54,9 @@
 		26308A672D8B39BC00D8C46A /* PreviousMatchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousMatchesViewController.swift; sourceTree = "<group>"; };
 		26308A6D2D91EC9500D8C46A /* MatchLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchLogicTests.swift; sourceTree = "<group>"; };
 		26308A6F2D91F00400D8C46A /* SetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
+		26308A712D95970300D8C46A /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		26308A742D95974800D8C46A /* MatchPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPersistence.swift; sourceTree = "<group>"; };
+		26308A772D95994F00D8C46A /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		26AB4AFC2D4C294E00A24773 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		26AB4AFF2D4C296300A24773 /* Match .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Match .swift"; sourceTree = "<group>"; };
 		49F7F399208622C100B49CC3 /* Sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sound.wav; sourceTree = "<group>"; };
@@ -115,6 +124,9 @@
 				26308A5F2D8B329500D8C46A /* MatchResult.swift */,
 				26308A642D8B334A00D8C46A /* MatchHistoryImporter.swift */,
 				26308A672D8B39BC00D8C46A /* PreviousMatchesViewController.swift */,
+				26308A712D95970300D8C46A /* GameController.swift */,
+				26308A742D95974800D8C46A /* MatchPersistence.swift */,
+				26308A772D95994F00D8C46A /* AudioPlayer.swift */,
 			);
 			path = TennisStarter;
 			sourceTree = "<group>";
@@ -257,10 +269,13 @@
 			files = (
 				26308A662D8B334A00D8C46A /* MatchHistoryImporter.swift in Sources */,
 				26AB4AFE2D4C294E00A24773 /* Set.swift in Sources */,
+				26308A782D95994F00D8C46A /* AudioPlayer.swift in Sources */,
 				BBA6F8DD1B26E78E006642BC /* ViewController.swift in Sources */,
 				26AB4B012D4C296300A24773 /* Match .swift in Sources */,
+				26308A722D95970300D8C46A /* GameController.swift in Sources */,
 				BBA6F8FB1B26E81E006642BC /* Game.swift in Sources */,
 				26308A602D8B329500D8C46A /* MatchResult.swift in Sources */,
+				26308A752D95974800D8C46A /* MatchPersistence.swift in Sources */,
 				BBA6F8DB1B26E78E006642BC /* AppDelegate.swift in Sources */,
 				26308A692D8B39BC00D8C46A /* PreviousMatchesViewController.swift in Sources */,
 			);
@@ -277,8 +292,11 @@
 				26AB4B002D4C296300A24773 /* Match .swift in Sources */,
 				496B3CDE1CE0BAA80090A701 /* Game.swift in Sources */,
 				26308A702D91F00400D8C46A /* SetTests.swift in Sources */,
+				26308A762D95974800D8C46A /* MatchPersistence.swift in Sources */,
 				26308A612D8B329500D8C46A /* MatchResult.swift in Sources */,
+				26308A732D95970300D8C46A /* GameController.swift in Sources */,
 				BBA6F8FD1B26E86B006642BC /* GameTests.swift in Sources */,
+				26308A792D95994F00D8C46A /* AudioPlayer.swift in Sources */,
 				26308A682D8B39BC00D8C46A /* PreviousMatchesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

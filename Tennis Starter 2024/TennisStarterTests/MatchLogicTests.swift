@@ -50,13 +50,8 @@ final class MatchLogicTests : XCTestCase {
     func testAlternatingSetWinners() {
         let match = Match()
 
-        // First set to Player 1
         for _ in 0..<6 { match.addGamePlayer1() }
-
-        // Second set to Player 2
         for _ in 0..<6 { match.addGamePlayer2() }
-
-        // Third set to Player 1
         for _ in 0..<6 { match.addGamePlayer1() }
 
         XCTAssertFalse(match.complete())
